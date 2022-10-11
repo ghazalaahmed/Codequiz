@@ -1,0 +1,19 @@
+user clicks start button
+make start button and make it functionable
+eventlistener for click
+user sees questions && answers
+build questions, options, and answers
+create Dom
+user clicks answers
+eventlistener
+Make sure buttons are clickable and they work
+user sees right or wrong
+Show correct or wrong
+
+function- if statement
+
+After time runs out, game is over, and they enter initials at the end
+
+input
+make sure intital box pops up and they click box to save to local storage
+eventlistener then save in local storage
