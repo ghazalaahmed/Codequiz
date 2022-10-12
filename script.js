@@ -11,17 +11,17 @@ var questions = [
         answer: "{ }"
     },
     {
-        question: "Which symbol is used to separate JavaScript statements?"
+        question: "Which symbol is used to separate JavaScript statements?",
         choices: ["Comma", "Colon", "Hyphen", "Semicolon"],
         answer: "Semicolon"
     },
     {
-        question: "Opening tag of HTML is called what?"
+        question: "Opening tag of HTML is called what?",
         choices: ["Ending tag", "Starting tag", "Closed tag", "Pair tags"],
         answer: "Starting tag"
     },
     {
-        question: "Which of the following CSS property is used to add shadows to the text?"
+        question: "Which of the following CSS property is used to add shadows to the text?",
         choices: ["Text-shadow", "Text-stroke", "Text-overflow", "Text-decoration"],
         answer: "Text-shadow"
     }
@@ -63,7 +63,6 @@ function endGame() {
     <h3>You got a score of ' + score + ' /100!</h3>
     <h3>That means you got '+ score/ 22 + ' questions correct!</h3>
     <input type= "text" id="name" placeholder="Enter initials">  
-    element.addEventListener("click",)
 
     document.getElementById("quizBody").innerHTML = quizContent;
 
@@ -74,12 +73,9 @@ function setScore() {
     localStorage.setItem("highscore" , score);
     localStorage.setItem("highscoreName" , document.getElementById('name').value);
     getScore();
+}
 
-    addEventListener
 
-    ;
-
-    document.getElementById("quizBody").innerHTML = quizContent;
 }
 
 //clears the score name and value in localStorage if user selects "go back"
@@ -107,7 +103,6 @@ function resetGame() {
     <h3>
         Start Quiz!
     </h3>
-    addEventListener
 
     document.getElementById("quizBody").innerHTML = quizContent;
 
@@ -128,18 +123,18 @@ function next() {
     }
     var quizContent  = "<h2" + questions[currentQuestion].question + "</h2>"
 
-    for (var buttonLoop = 0; buttonLoop < questions[currentQuestion].choices.length; buttonLoop++) {        
-        var buttonCode = "<button onclick=\"[ANS]\">[CHOICE]</button>";         
-        buttonCode = buttonCode.replace("[CHOICE]", questions[currentQuestion].choices[buttonLoop]);        
-        
-        if (questions[currentQuestion].choices[buttonLoop] == questions[currentQuestion].answer) {           
-             buttonCode = buttonCode.replace("[ANS]", "correct()");        
-        }   else { 
-               buttonCode = buttonCode.replace("[ANS]", "wrong()");       
-             }        
-             quizContent += buttonCode   
+    for (var buttonLoop = 0; buttonLoop < questions[currentQuestion].choices.length; buttonLoop++) {
+        var buttonCode = "<button onclick=\"[ANS]\">[CHOICE]</button>";
+        buttonCode = buttonCode.replace("[CHOICE]", questions[currentQuestion].choices[buttonLoop]);
+
+        if (questions[currentQuestion].choices[buttonLoop] == questions[currentQuestion].answer) {
+            buttonCode = buttonCode.replace("[ANS]", "correct()");
+        } else {
+            buttonCode = buttonCode.replace("[ANS]", "wrong()");
+        }
+        quizContent += buttonCode
     }
-    
+
     document.getElementById("quizBody").innerHTML = quizContent;
 }
 
