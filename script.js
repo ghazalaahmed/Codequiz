@@ -28,25 +28,26 @@ var questions = [
 ]
 
 
-//Declaring the values and timer functions
+//Declaring values and timer functions
 var score = 0;
 var currentQuestion = -1;
 var timeLeft = 0;
 var timer;
 
-//Timer begins after start button is clicked
+//After start quiz is clicked, timer begins
 function start() {
-    timeleft = 75;
-    document.getElementById("timeLeft").innerHTML = timeLeft;
+    timeLeft = 75;
+    document.getElementById("timeleft").innerHTML = timeLeft;
+    startBtn.addeventlistener("click", startQuiz);
 
-    timer = setInterval(function) {
-        timeleft--;
+    timer = setInterval(function () {
+        timeLeft--;
         document.getElementById("timeLeft").innerHTML = timeLeft;
 
-        //After time runs out, game is over
+        //Once timer stops, the game ends
         if (timeLeft <= 0) {
             clearInterval(timer);
-            endquiz();
+            allDone();
         }
 
     }, 1000);
@@ -54,74 +55,80 @@ function start() {
     next();
 }
 
-//Game ends when timer reaches 0 or when all questions are answered
-function endGame() {
+// Game is over when all questions are answered or timer reaches 0
+function allDone() {
     clearInterval(timer);
 
-    var quizContent =
-    <h2>All Done!</h2>
-    <h3>You got a score of ' + score + ' /100!</h3>
-    <h3>That means you got '+ score/ 22 + ' questions correct!</h3>
-    <input type= "text" id="name" placeholder="Enter initials">  
+    var quizContent = ` 
+        <h2>All done!</h2>
+        <h3> Your final ` + score + ` /100!</h3>
+        <h3> you answered `+ score / 22 + ` questions correct!</h3>
+        <input type="text" id="name" placeholder="Enter initials">
+        <button onclick="setScore()">Set Score</button>`;
 
     document.getElementById("quizBody").innerHTML = quizContent;
-
 }
-
-//Save in local storage
+//Save score in localStorage
 function setScore() {
-    localStorage.setItem("highscore" , score);
-    localStorage.setItem("highscoreName" , document.getElementById('name').value);
+    localStorage.setItem("highscore", score);
+    localStorage.setItem("highscoreName", document.getElementById('name').value);
     getScore();
 }
 
+function getScore() {
+    var quizContent = ` 
+    <h2> ` + localStorage.getItem("highscoreName") + `'s highscore is:</h2>
+    <h1> ` + localStorage.getItem("highscore") + `</h1><br>
+    <button onclick="resetGame()">Play again!</button>`;
 
+    document.getElementById("quizBody").innerHTML = quizContent;
 }
 
-//clears the score name and value in localStorage if user selects "go back"
-function goBack() {
-    localStorage.setItem("highscore", " ");
-    localStorage.setItem("highscoreName", " ");
 
-    resetGame();
-}
-
-//Reset the quiz
+//Reset Quiz
 function resetGame() {
     clearInterval(timer);
-    score = 0
-    currentQuestion = -1
-    timeleft = 0
+    score = 0;
+    currentQuestion = -1;
+    timeLeft = 0;
     timer = null;
 
-    document.getElementById("timerLeft").innerHTML = timeLeft;
+    document.getElementById("timeLeft").innerHTML = timeLeft;
 
-    var quizContent = ' 
+    var quizContent = ` 
     <h1>
         Coding Quiz Challenge!
     </h1>
     <h3>
-        Start Quiz!
+        Click Start Quiz to play!
     </h3>
+    button onclick= "start()">Start Quiz</button>`;
 
     document.getElementById("quizBody").innerHTML = quizContent;
 
 }
 
-//Deduct 15 seconds from the timer if user guesses wrong
+//takes away 20 seconds from the timer for wrong answwers
 function wrong() {
-    timeLeft -=15;
+    timeLeft -= 20;
     next();
 }
-// This fucntion loops through the questions
+
+//Score increases by 22 if user gets answer right
+function correct() {
+    score += 22;
+    next()
+}
+//Function loops through the questions
 function next() {
     currentQuestion++;
 
-    if (currentQuestion > questions.length -1) {
-        endGame();
+    if (currentQuestion > question.length - 1) {
+        endQuiz();
         return;
     }
-    var quizContent  = "<h2" + questions[currentQuestion].question + "</h2>"
+
+    var quizContent = "<h2>" + questions[currentQuestion].title + "</h2>"
 
     for (var buttonLoop = 0; buttonLoop < questions[currentQuestion].choices.length; buttonLoop++) {
         var buttonCode = "<button onclick=\"[ANS]\">[CHOICE]</button>";
@@ -137,4 +144,10 @@ function next() {
 
     document.getElementById("quizBody").innerHTML = quizContent;
 }
+
+
+
+
+
+
 
