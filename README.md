@@ -20,6 +20,7 @@ WHEN the game is over
 THEN I can save my initials and score
 
 Deployed link:
+https://ghazalaahmed.github.io/Codequiz/
 
 
 
