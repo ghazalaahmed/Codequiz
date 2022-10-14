@@ -71,10 +71,10 @@ function allDone() {
 function submit() {
     localStorage.setItem("highscore", score);
     localStorage.setItem("highscoreName", document.getElementById('name').value);
-    submit();
+    getScore();
 }
 
-function submit() {
+function getScore() {
     var quizContent = ` 
     <h2> ` + localStorage.getItem("highscoreName") + `'s Highscore is:</h2>
     <h1> ` + localStorage.getItem("highscore") + `</h1><br>
