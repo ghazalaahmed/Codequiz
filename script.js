@@ -37,8 +37,7 @@ var timer;
 //After start quiz is clicked, timer begins
 function start() {
     timeLeft = 75;
-    document.getElementById("timeleft").innerHTML = timeLeft;
-    startBtn.addeventlistener("click", startQuiz);
+    document.getElementById("timeLeft").innerHTML = timeLeft;
 
     timer = setInterval(function () {
         timeLeft--;
@@ -61,23 +60,23 @@ function allDone() {
 
     var quizContent = ` 
         <h2>All done!</h2>
-        <h3> Your final ` + score + ` /100!</h3>
+        <h3> Your final score is ` + score + ` /100!</h3>
         <h3> you answered `+ score / 22 + ` questions correct!</h3>
         <input type="text" id="name" placeholder="Enter initials">
-        <button onclick="setScore()">Set Score</button>`;
+        <button onclick="submit()">Submit</button>`;
 
     document.getElementById("quizBody").innerHTML = quizContent;
 }
 //Save score in localStorage
-function setScore() {
+function submit() {
     localStorage.setItem("highscore", score);
     localStorage.setItem("highscoreName", document.getElementById('name').value);
-    getScore();
+    submit();
 }
 
-function getScore() {
+function submit() {
     var quizContent = ` 
-    <h2> ` + localStorage.getItem("highscoreName") + `'s highscore is:</h2>
+    <h2> ` + localStorage.getItem("highscoreName") + `Highscore is:</h2>
     <h1> ` + localStorage.getItem("highscore") + `</h1><br>
     <button onclick="resetGame()">Play again!</button>`;
 
@@ -108,9 +107,9 @@ function resetGame() {
 
 }
 
-//takes away 20 seconds from the timer for wrong answwers
+//takes away 5 seconds from the timer for wrong answwers
 function wrong() {
-    timeLeft -= 20;
+    timeLeft -=5;
     next();
 }
 
@@ -123,12 +122,12 @@ function correct() {
 function next() {
     currentQuestion++;
 
-    if (currentQuestion > question.length - 1) {
+    if (currentQuestion > questions.length - 1) {
         endQuiz();
         return;
     }
 
-    var quizContent = "<h2>" + questions[currentQuestion].title + "</h2>"
+    var quizContent = "<h2>" + questions[currentQuestion].question + "</h2>"
 
     for (var buttonLoop = 0; buttonLoop < questions[currentQuestion].choices.length; buttonLoop++) {
         var buttonCode = "<button onclick=\"[ANS]\">[CHOICE]</button>";
