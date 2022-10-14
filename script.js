@@ -76,7 +76,7 @@ function submit() {
 
 function submit() {
     var quizContent = ` 
-    <h2> ` + localStorage.getItem("highscoreName") + `Highscore is:</h2>
+    <h2> ` + localStorage.getItem("highscoreName") + `'s Highscore is:</h2>
     <h1> ` + localStorage.getItem("highscore") + `</h1><br>
     <button onclick="resetGame()">Play again!</button>`;
 
